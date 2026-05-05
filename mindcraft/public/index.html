@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mindcraft - Event Registration</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- jQuery Validate Plugin -->
+    <script src="https://cdn.jsdelivr.net/jquery.validation/1.19.5/jquery.validate.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <!-- Header Section -->
+        <header class="header">
+            <div class="header-content">
+                <div class="logo-section">
+                    <div class="logo">
+                        <span class="logo-icon">🎯</span>
+                        <h1>Mindcraft</h1>
+                    </div>
+                    <p class="tagline">Register for Amazing Events</p>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <div class="form-container">
+                <!-- Success Message -->
+                <div id="successMessage" class="alert alert-success" style="display: none;">
+                    <span class="alert-icon">✓</span>
+                    <div class="alert-content">
+                        <h3>Registration Successful!</h3>
+                        <p>Thank you for registering for <strong id="registeredEvent"></strong>. We're excited to see you at the event!</p>
+                    </div>
+                </div>
+
+                <!-- Error Message -->
+                <div id="errorMessage" class="alert alert-error" style="display: none;">
+                    <span class="alert-icon">✕</span>
+                    <div class="alert-content">
+                        <h3>Oops! Something went wrong</h3>
+                        <p id="errorText"></p>
+                    </div>
+                </div>
+
+                <!-- Form Section -->
+                <div id="formSection" class="form-section">
+                    <h2>Event Registration Form</h2>
+                    <p class="form-subtitle">Join us for an incredible experience. Fill in your details below.</p>
+
+                    <form id="registrationForm" name="registrationForm">
+                        <!-- Full Name -->
+                        <div class="form-group">
+                            <label for="fullName">Full Name <span class="required">*</span></label>
+                            <input 
+                                type="text" 
+                                id="fullName" 
+                                name="fullName" 
+                                placeholder="Enter your full name"
+                                class="form-control"
+                                required
+                            >
+                            <span class="error" id="fullName-error"></span>
+                        </div>
+
+                        <!-- Email -->
+                        <div class="form-group">
+                            <label for="email">Email Address <span class="required">*</span></label>
+                            <input 
+                                type="email" 
+                                id="email" 
+                                name="email" 
+                                placeholder="Enter your email"
+                                class="form-control"
+                                required
+                            >
+                            <span class="error" id="email-error"></span>
+                        </div>
+
+                        <!-- Phone Number -->
+                        <div class="form-group">
+                            <label for="phoneNumber">Phone Number <span class="required">*</span></label>
+                            <input 
+                                type="tel" 
+                                id="phoneNumber" 
+                                name="phoneNumber" 
+                                placeholder="Enter your phone number"
+                                class="form-control"
+                                pattern="[0-9]{10}"
+                                required
+                            >
+                            <span class="error" id="phoneNumber-error"></span>
+                        </div>
+
+                        <!-- College Name -->
+                        <div class="form-group">
+                            <label for="collegeName">College Name <span class="required">*</span></label>
+                            <input 
+                                type="text" 
+                                id="collegeName" 
+                                name="collegeName" 
+                                placeholder="Enter your college name"
+                                class="form-control"
+                                required
+                            >
+                            <span class="error" id="collegeName-error"></span>
+                        </div>
+
+                        <!-- Department -->
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="department">Department <span class="required">*</span></label>
+                                <select id="department" name="department" class="form-control" required>
+                                    <option value="">Select Department</option>
+                                    <option value="Computer Science">Computer Science</option>
+                                    <option value="Electronics">Electronics</option>
+                                    <option value="Mechanical">Mechanical</option>
+                                    <option value="Electrical">Electrical</option>
+                                    <option value="Civil">Civil</option>
+                                    <option value="Chemical">Chemical</option>
+                                    <option value="Information Technology">Information Technology</option>
+                                    <option value="Biotechnology">Biotechnology</option>
+                                    <option value="Other">Other</option>
+                                </select>
+                                <span class="error" id="department-error"></span>
+                            </div>
+
+                            <!-- Year -->
+                            <div class="form-group">
+                                <label for="year">Year <span class="required">*</span></label>
+                                <select id="year" name="year" class="form-control" required>
+                                    <option value="">Select Year</option>
+                                    <option value="1st Year">1st Year</option>
+                                    <option value="2nd Year">2nd Year</option>
+                                    <option value="3rd Year">3rd Year</option>
+                                    <option value="4th Year">4th Year</option>
+                                </select>
+                                <span class="error" id="year-error"></span>
+                            </div>
+                        </div>
+
+                        <!-- Event Name -->
+                        <div class="form-group">
+                            <label for="eventName">Event Name <span class="required">*</span></label>
+                            <select id="eventName" name="eventName" class="form-control" required>
+                                <option value="">Select Event</option>
+                                <option value="Tech Summit 2024">Tech Summit 2024</option>
+                                <option value="Web Development Workshop">Web Development Workshop</option>
+                                <option value="AI & Machine Learning">AI & Machine Learning</option>
+                                <option value="Hackathon">Hackathon</option>
+                                <option value="Startup Pitch">Startup Pitch</option>
+                                <option value="Cloud Computing">Cloud Computing</option>
+                                <option value="DevOps Bootcamp">DevOps Bootcamp</option>
+                                <option value="Networking Event">Networking Event</option>
+                            </select>
+                            <span class="error" id="eventName-error"></span>
+                        </div>
+
+                        <!-- Submit Button -->
+                        <button type="submit" class="btn btn-primary">
+                            <span class="btn-text">Register Now</span>
+                            <span class="btn-spinner" style="display: none;">
+                                <i class="spinner"></i>
+                            </span>
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Loading Indicator -->
+                <div id="loadingSpinner" class="loading-spinner" style="display: none;">
+                    <div class="spinner-circle"></div>
+                    <p>Processing your registration...</p>
+                </div>
+            </div>
+
+            <!-- Stats Section -->
+            <div class="stats-section">
+                <div class="stat-card">
+                    <div class="stat-icon">👥</div>
+                    <h3 id="totalRegistrations">0</h3>
+                    <p>Total Registrations</p>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">🎯</div>
+                    <h3>10+</h3>
+                    <p>Events</p>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">🌟</div>
+                    <h3>5k+</h3>
+                    <p>Participants</p>
+                </div>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>&copy; 2024 Mindcraft. All rights reserved. | Event Registration Platform</p>
+        </footer>
+    </div>
+
+    <!-- Scripts -->
+    <script>
+        $(document).ready(function() {
+            // Initialize form validation
+            $('#registrationForm').validate({
+                rules: {
+                    fullName: {
+                        required: true,
+                        minlength: 3,
+                        pattern: /^[a-zA-Z\s]+$/
+                    },
+                    email: {
+                        required: true,
+                        email: true
+                    },
+                    phoneNumber: {
+                        required: true,
+                        pattern: /^[0-9]{10}$/
+                    },
+                    collegeName: {
+                        required: true,
+                        minlength: 3
+                    },
+                    department: {
+                        required: true
+                    },
+                    year: {
+                        required: true
+                    },
+                    eventName: {
+                        required: true
+                    }
+                },
+                messages: {
+                    fullName: {
+                        required: 'Full name is required',
+                        minlength: 'Name must be at least 3 characters',
+                        pattern: 'Name should only contain letters and spaces'
+                    },
+                    email: {
+                        required: 'Email is required',
+                        email: 'Please enter a valid email address'
+                    },
+                    phoneNumber: {
+                        required: 'Phone number is required',
+                        pattern: 'Phone number must be 10 digits'
+                    },
+                    collegeName: {
+                        required: 'College name is required',
+                        minlength: 'College name must be at least 3 characters'
+                    },
+                    department: {
+                        required: 'Please select a department'
+                    },
+                    year: {
+                        required: 'Please select your year'
+                    },
+                    eventName: {
+                        required: 'Please select an event'
+                    }
+                },
+                errorClass: 'input-error',
+                errorElement: 'span',
+                submitHandler: function(form) {
+                    submitRegistration();
+                }
+            });
+
+            // Form submission
+            function submitRegistration() {
+                const formData = {
+                    fullName: $('#fullName').val(),
+                    email: $('#email').val(),
+                    phoneNumber: $('#phoneNumber').val(),
+                    collegeName: $('#collegeName').val(),
+                    department: $('#department').val(),
+                    year: $('#year').val(),
+                    eventName: $('#eventName').val()
+                };
+
+                // Show loading spinner
+                $('#loadingSpinner').show();
+                $('#formSection').hide();
+
+                // Make AJAX request
+                $.ajax({
+                    url: '/register',
+                    type: 'POST',
+                    contentType: 'application/json',
+                    data: JSON.stringify(formData),
+                    success: function(response) {
+                        if (response.success) {
+                            $('#registeredEvent').text(formData.eventName);
+                            $('#successMessage').show();
+                            $('#loadingSpinner').hide();
+                            $('#registrationForm')[0].reset();
+
+                            // Auto-scroll to success message
+                            $('html, body').animate({
+                                scrollTop: $('#successMessage').offset().top - 100
+                            }, 800);
+
+                            // Reset form after 3 seconds
+                            setTimeout(function() {
+                                $('#successMessage').hide();
+                                $('#formSection').show();
+                            }, 3000);
+                        }
+                    },
+                    error: function(xhr) {
+                        $('#loadingSpinner').hide();
+                        $('#formSection').show();
+
+                        let errorMessage = 'An error occurred. Please try again.';
+                        if (xhr.responseJSON && xhr.responseJSON.message) {
+                            errorMessage = xhr.responseJSON.message;
+                        }
+
+                        $('#errorText').text(errorMessage);
+                        $('#errorMessage').show();
+
+                        // Auto-hide error after 5 seconds
+                        setTimeout(function() {
+                            $('#errorMessage').hide();
+                        }, 5000);
+                    }
+                });
+            }
+
+            // Fetch total registrations for display
+            fetchRegistrationStats();
+
+            function fetchRegistrationStats() {
+                $.ajax({
+                    url: '/api/registrations',
+                    type: 'GET',
+                    success: function(response) {
+                        if (response.success) {
+                            $('#totalRegistrations').text(response.count);
+                        }
+                    },
+                    error: function() {
+                        // Silently fail for stats
+                        console.log('Could not fetch registration stats');
+                    }
+                });
+            }
+
+            // Refresh stats every 10 seconds
+            setInterval(fetchRegistrationStats, 10000);
+        });
+    </script>
+</body>
+</html>
